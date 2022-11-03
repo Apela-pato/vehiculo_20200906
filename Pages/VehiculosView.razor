@@ -1,0 +1,66 @@
+@page "/vehiculos"
+@using models;
+
+<PageTitle>lista Vehiculo</PageTitle>
+<h1>Vehiculo</h1>
+
+<label for="">Vehiculo</label>
+<input type="text" @bind="iD">
+
+<label for="">Marca</label>
+<input type="text" @bind="Marca">
+
+<label for="">Modelo</label>
+<input type="text" @bind="Modelo">
+
+
+<labbel for="">Año</labbel>
+<input type="text" @bind="Año">
+
+<br><br>
+<label for="">color</label>
+<input type="text" @bind="color">
+<br><br>
+<div></div>
+<button type="button" class="btn btn-outline-success">Agregar</button>
+<button type="button" class="btn btn-outline-danger">Eliminar</button>
+<div></div>
+<br><br>
+<table class="table">
+    <thead>
+        <tr>
+            <th>iD</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Año</th>
+            <th>color</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vehiculo in Vehiculos )
+        {
+            <tr>
+                <td>@vehiculo.vehiculoID</td>
+                <td>@vehiculo.Marca</td>
+                <td>@vehiculo.Modelo</td>
+                <td>@vehiculo.año</td>
+                <td>@vehiculo.Color</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code{
+
+    int iD;
+    char Marca;
+    char Modelo;
+    char Año;
+    char color;
+    public List<vehiculo> Vehiculos {get; set;}= new List<vehiculo>(){
+        
+        new vehiculo{
+            
+        }};
+
+}
