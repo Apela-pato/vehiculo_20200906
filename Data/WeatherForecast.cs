@@ -1,4 +1,4 @@
-namespace vehiculo_20200906.Data;
+namespace vehiculo_20200906.Data.models;
 
 public class WeatherForecast
 {

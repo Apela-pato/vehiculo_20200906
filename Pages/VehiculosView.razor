@@ -1,31 +1,34 @@
-@page "/vehiculos"
+@page "/Vehiculos"
 @using models;
+
 
 <PageTitle>lista Vehiculo</PageTitle>
 <h1>Vehiculo</h1>
 
 <label for="">Vehiculo</label>
-<input type="text" @bind="iD">
+<input type="text" @bind="VehiculoSeleccionado!.id">
 
 <label for="">Marca</label>
-<input type="text" @bind="Marca">
+<input type="text" @bind="VehiculoSeleccionado!.Marca">
 
 <label for="">Modelo</label>
-<input type="text" @bind="Modelo">
+<input type="text" @bind="VehiculoSeleccionado!.Modelo">
 
 
 <labbel for="">Año</labbel>
-<input type="text" @bind="Año">
+<input type="text" @bind="VehiculoSeleccionado!.año">
 
 <br><br>
 <label for="">color</label>
-<input type="text" @bind="color">
+<input type="text" @bind="VehiculoSeleccionado!.color">
 <br><br>
 <div></div>
 <button type="button" class="btn btn-outline-success">Agregar</button>
 <button type="button" class="btn btn-outline-danger">Eliminar</button>
+<button type="button" class="btn btn-outline-warning">Editar</button>
 <div></div>
 <br><br>
+
 <table class="table">
     <thead>
         <tr>
@@ -37,30 +40,68 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var vehiculo in Vehiculos )
+        @foreach (var Vehiculo in Vehiculos )
         {
             <tr>
-                <td>@vehiculo.vehiculoID</td>
-                <td>@vehiculo.Marca</td>
-                <td>@vehiculo.Modelo</td>
-                <td>@vehiculo.año</td>
-                <td>@vehiculo.Color</td>
+                <td>@Vehiculo.VehiculoID</td>
+                <td>@Vehiculo.Marca</td>
+                <td>@Vehiculo.Modelo</td>
+                <td>@Vehiculo.año</td>
+                <td>@Vehiculo.Color</td>
             </tr>
         }
     </tbody>
 </table>
 
-@code{
 
-    int iD;
-    char Marca;
-    char Modelo;
-    char Año;
-    char color;
-    public List<vehiculo> Vehiculos {get; set;}= new List<vehiculo>(){
-        
-        new vehiculo{
-            
-        }};
 
+@code {
+    //https://icon-sets.iconify.design/oi/trash/
+    public List<Vehiculo>? Vehiculos { get; set; }
+    = new List<Vehiculo>();
+    async Task Cargar()
+    {
+var r = await Vehiculo.Consultar();
+        if(r.Succeeded) Vehiculo = r.Data;
+    }
+    protected async override Task OnInitializedAsync()
+    {
+        await Cargar();
+    }
+    void Editar(int Id)
+    {
+        VehiculoSeleccionado = Vehiculos!.FirstOrDefault(p => p.VehiculoID == Id) ?? new Vehiculo();
+    }
+    async Task Eliminar(int Id)
+    {
+        await Vehiculo.Eliminar(Id);
+        await Cargar();
+    }
+
+    async Task Guardar()
+    {
+        if (
+        !string.IsNullOrEmpty(VehiculoSeleccionado!.) &&
+        !string.IsNullOrEmpty(VehiculoSeleccionado!.)
+        )
+        {
+           if(VehiculoSeleccionado.VehiculoID==0)
+           {
+            await VehiculosView.Crear(
+            VehiculoSeleccionado!.id,
+            VehiculoSeleccionado!.Marca,
+            VehiculoSeleccionado!.Modelo,
+            VehiculoSeleccionado!.año,
+            VehiculoSeleccionado!.Color
+
+            );
+            return;
+           }
+            //Codigo para editar
+           
+            await Cargar();
+        }
+    }
+
+    public vehiculo? VehiculoSeleccionado { get; set; } = new Vehiculo();
 }

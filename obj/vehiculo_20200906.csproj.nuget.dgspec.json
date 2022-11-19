@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\vehiculo_20200906\\vehiculo_20200906.csproj": {}
+    "C:\\vehiculo_20200906\\Vehiculo_20200906.csproj": {}
   },
   "projects": {
-    "C:\\vehiculo_20200906\\vehiculo_20200906.csproj": {
+    "C:\\vehiculo_20200906\\Vehiculo_20200906.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\vehiculo_20200906\\vehiculo_20200906.csproj",
-        "projectName": "vehiculo_20200906",
-        "projectPath": "C:\\vehiculo_20200906\\vehiculo_20200906.csproj",
+        "projectUniqueName": "C:\\vehiculo_20200906\\Vehiculo_20200906.csproj",
+        "projectName": "Vehiculo_20200906",
+        "projectPath": "C:\\vehiculo_20200906\\Vehiculo_20200906.csproj",
         "packagesPath": "C:\\Users\\Luis Gabriel\\.nuget\\packages\\",
         "outputPath": "C:\\vehiculo_20200906\\obj\\",
         "projectStyle": "PackageReference",
@@ -39,6 +39,20 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "System.Net.Http.Json": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
